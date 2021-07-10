@@ -12,13 +12,13 @@ from .managers import CustomUserManager
 class User(AbstractBaseUser, PermissionsMixin):
     # These fields tie to the roles!
     ADMIN = 1
-    MANAGER = 2
-    EMPLOYEE = 3
+    KASSIR = 2
+    SOTUVCHI = 3
 
     ROLE_CHOICES = (
         (ADMIN, 'Admin'),
-        (MANAGER, 'Manager'),
-        (EMPLOYEE, 'Employee')
+        (KASSIR, 'Kassir'),
+        (SOTUVCHI, 'Sotuvchi')
     )
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=30, blank=True)

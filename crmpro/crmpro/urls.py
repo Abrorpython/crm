@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/',include('userapp.urls')),
     path('api/finance/',include('financeapp.urls')),
-    paht('api/sales/',include('salesapp.urls')),
+    path('api/sales/',include('salesapp.urls')),
 ]
