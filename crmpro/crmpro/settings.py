@@ -103,8 +103,8 @@ WSGI_APPLICATION = 'crmpro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'base',
-        'USER': 'userdb',
+        'NAME': 'base', # db5
+        'USER': 'userdb', # user5
         'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '5432'

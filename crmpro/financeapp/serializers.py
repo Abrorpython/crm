@@ -393,16 +393,14 @@ class EndValuesSerialziers(serializers.Serializer):
     def create(self, validate_data):
         a = Table.objects.all().order_by('-autodate')[:1]
         for i in a:
-            cash = float(i.cashmoney)-float(validate_data['cashmoneys'])
-            plastic = float(i.plasticmoney) - \
-                float(validate_data['plasticmoneys'])
-            account = float(i.accountnumbermoney) - \
-                float(validate_data['accountnumbermoneys'])
-            dollar = float(i.dollar)-float(validate_data['dollars'])
+            deng = float(i.cashmoney)-float(validate_data['cashmoneys'])
+            deng2 = float(i.plasticmoney) - float(validate_data['plasticmoneys'])
+            deng3 = float(i.accountnumbermoney) - float(validate_data['accountnumbermoneys'])
+            deng4 = float(i.dollar)-float(validate_data['dollars'])
             model = Endvalue(
-                cashmoneys=cash,
-                plasticmoneys=plastic,
-                accountnumbermoneys=account,
-                dollars=dollar
+                cashmoneys=deng,
+                plasticmoneys=deng2,
+                accountnumbermoneys=deng3,
+                dollars=deng4
             )
             model.save()
