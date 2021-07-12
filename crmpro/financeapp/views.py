@@ -1,6 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import (Employees, Origin, AccountNumber,
                      Months, Counterparty, RawMaterial, ProductName, Table)
 
@@ -12,6 +14,7 @@ from .serializers import (EmployesSerializers, EndValuesSerialziers,
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def endvalue(request):
     if request.method == 'GET':
         endvalues = Endvalue.objects.all().order_by('-autodate')[:1]
@@ -25,6 +28,7 @@ def endvalue(request):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def table_list(request):
     if request.method == 'GET':
         table = Table.objects.all()
@@ -39,6 +43,7 @@ def table_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def table_detail(request, pk):
     try:
         table = Table.objects.get(pk=pk)
@@ -74,6 +79,7 @@ def table_detail(request, pk):
 
 # Mahsulot nomi uchun(ProductName)
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def productname_list(request):
     if request.method == 'GET':
         productname = ProductName.objects.all()
@@ -89,6 +95,7 @@ def productname_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def productname_detail(request, pk):
     try:
         productname = ProductName.objects.get(pk=pk)
@@ -110,6 +117,7 @@ def productname_detail(request, pk):
 
 # Manba uchun (Origin)
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def origin_list(request):
     if request.method == 'GET':
         origin = Origin.objects.all()
@@ -125,6 +133,7 @@ def origin_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def origin_detail(request, pk):
     try:
         origin = Origin.objects.get(pk=pk)
@@ -147,6 +156,7 @@ def origin_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def accountnumber_list(request):
     if request.method == 'GET':
         accountnumber = AccountNumber.objects.all()
@@ -161,6 +171,7 @@ def accountnumber_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def accountnumber_detail(request, pk):
     try:
         accountnumber = AccountNumber.objects.get(pk=pk)
@@ -183,6 +194,7 @@ def accountnumber_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def month_list(request):
     if request.method == 'GET':
         month = Months.objects.all()
@@ -197,6 +209,7 @@ def month_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def month_detail(request, pk):
     try:
         month = Months.objects.get(pk=pk)
@@ -218,6 +231,7 @@ def month_detail(request, pk):
 
 # CounterPart - Kontragent
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def counterpart_list(request):
     if request.method == 'GET':
         counter = Counterparty.objects.all()
@@ -232,6 +246,7 @@ def counterpart_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def counterparty_detail(request, pk):
     try:
         counter = Counterparty.objects.get(pk=pk)
@@ -253,6 +268,7 @@ def counterparty_detail(request, pk):
 
 # Employess - Hodimlar
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def employes_list(request):
     if request.method == 'GET':
         employes = Employees.objects.all()
@@ -267,6 +283,7 @@ def employes_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def employes_detail(request, pk):
     try:
         employes = Employees.objects.get(pk=pk)
@@ -289,6 +306,7 @@ def employes_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def rawmaterial_list(request):
     if request.method == 'GET':
         rawmaterial = RawMaterial.objects.all()
@@ -303,6 +321,7 @@ def rawmaterial_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def rawmaterial_detail(request, pk):
     try:
         rawmaterial = RawMaterial.objects.get(pk=pk)

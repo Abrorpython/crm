@@ -1,8 +1,8 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from rest_framework.decorators import permission_classes
 from rest_framework.decorators import api_view
-
+from rest_framework.permissions import AllowAny,IsAuthenticated
 from . models import Sales, FuraCondition
 from . serializers import SalesSerializers, FuraConditionsSerializers
 
@@ -10,6 +10,7 @@ from . serializers import SalesSerializers, FuraConditionsSerializers
 # sotuv uchun
 
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def sales_list(request):
     if request.method == 'GET':
         sales = Sales.objects.all()
@@ -24,6 +25,7 @@ def sales_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def sales_detail(request, pk):
     try:
         sales = Sales.objects.get(pk=pk)
@@ -46,6 +48,7 @@ def sales_detail(request, pk):
 # fura holati
 
 @api_view(['GET', 'POST'])
+@permission_classes((AllowAny, ))
 def fura_list(request):
     if request.method == 'GET':
         fura = FuraCondition.objects.all()
@@ -59,6 +62,7 @@ def fura_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((AllowAny, ))
 def fura_detail(request, pk):
     try:
         fura = FuraCondition.objects.get(pk=pk)
