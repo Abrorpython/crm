@@ -31,9 +31,10 @@ INSTALLED_APPS = [
     # for api
     'rest_framework',
     # for app
-    'userapp', # user uchun
-    'financeapp', # kassa uchun
-    'salesapp', # xarid uchun
+    'userapp',      # user uchun
+    'financeapp',   # kassa uchun
+    'salesapp',     # xarid uchun
+    'shoppingapp',  # sotuv uchun
 ]
 ROOT_URLCONF = 'django_rest_role_jwt.urls' # for user
 REST_FRAMEWORK = {                            

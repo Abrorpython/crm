@@ -8,15 +8,13 @@ from . serializers import SalesSerializers, FuraConditionsSerializers
 
 
 # sotuv uchun
-
 @api_view(['GET', 'POST'])
 @permission_classes((AllowAny, ))
 def sales_list(request):
     if request.method == 'GET':
         sales = Sales.objects.all()
         serializers = SalesSerializers(sales, many=True)
-        a = serializers.data
-        return Response(a)
+        return Response(serializers.data)
     elif request.method == 'POST':
         serializers = SalesSerializers(data=request.data)
         serializers.is_valid(raise_exception=False)

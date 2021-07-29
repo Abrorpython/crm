@@ -99,7 +99,7 @@ def productname_list(request):
 def productname_detail(request, pk):
     try:
         productname = ProductName.objects.get(pk=pk)
-    except Origin.DoesNotExist:
+    except ProductName.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
         serilazer = ProductNameSerializers(productname)
@@ -219,7 +219,7 @@ def month_detail(request, pk):
         serializer = MonthSerializers(month)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = Months(month, data=request.data)
+        serializer = MonthSerializers(month, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -297,7 +297,7 @@ def employes_detail(request, pk):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.erors, status=status.HTTP_404_NOT_FOUND)
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
     elif request.method == 'DELETE':
         employes.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -335,7 +335,7 @@ def rawmaterial_detail(request, pk):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.erors, status=status.HTTP_404_NOT_FOUND)
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
     elif request.method == 'DELETE':
         rawmaterial.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

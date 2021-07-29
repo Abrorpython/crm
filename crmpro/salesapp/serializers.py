@@ -42,36 +42,95 @@ class SalesSerializers(serializers.Serializer):
     buymonth = serializers.IntegerField()  # sotib olingan oy
     finishedmonth = serializers.IntegerField()  # tugagan oy
     comment = serializers.CharField(required=True)  # commentariya
-
+    tanPrice = serializers.FloatField()  # tannarx thatsall/amount
+    amounttotal = serializers.FloatField()
+    amountpurchase = serializers.FloatField()
+    totalthatsall = serializers.FloatField()
     def create(self, validated_data):
-        pur = float(validated_data['amount']) * float(validated_data['price'])
-        thatsal = float(pur)+float(validated_data['nds'])+float(validated_data['veterinar'])+float(validated_data['goStandart'])+float(validated_data['gigiena'])+float(
-            validated_data['customer'])+float(validated_data['deklarent'])+float(validated_data['delivery'])+float(validated_data['swift'])
-        model = Sales(
-            salesNumber=validated_data['salesNumber'],
-            data=validated_data['data'],
-            country_id=validated_data['country'],
-            productname_id=validated_data['productname'],
-            slaughteredCattle=validated_data['slaughteredCattle'],
-            amount=validated_data['amount'],
-            loss=validated_data['loss'],
-            price=validated_data['price'],
-            purchase=pur,
-            nds=validated_data['nds'],
-            veterinar=validated_data['veterinar'],
-            goStandart=validated_data['goStandart'],
-            gigiena=validated_data['gigiena'],
-            customer=validated_data['customer'],
-            deklarent=validated_data['deklarent'],
-            delivery=validated_data['delivery'],
-            swift=validated_data['swift'],
-            ministryFinance=validated_data['ministryFinance'],
-            thatsall=thatsal,
-            accountnumber_id=validated_data['accountnumber'],
-            finisheddate=validated_data['finisheddate'],
-            willBePaid=validated_data['willBePaid'],
-            residue=validated_data['residue'],
-            buymonth=validated_data['buymonth'],
-            finishedmonth=validated_data['finishedmonth'],
-            comment=validated_data['comment'])
-        model.save()
+        finish = Sales.objects.all().order_by('-date')[:1]
+        if not finish:
+            pur = float(validated_data['amount']) * float(validated_data['price'])
+            thatsal = float(pur)+float(validated_data['nds'])+float(validated_data['veterinar'])+float(validated_data['goStandart'])+float(validated_data['gigiena'])+float(
+                validated_data['customer'])+float(validated_data['deklarent'])+float(validated_data['delivery'])+float(validated_data['swift'])
+            residues = float(thatsal) - float(validated_data['willBePaid'])
+            tanPrice1 = (float(thatsal)/float(validated_data['amount']))
+            model = Sales(
+                salesNumber=validated_data['salesNumber'],
+                data=validated_data['data'],
+                country_id=validated_data['country'],
+                productname_id=validated_data['productname'],
+                slaughteredCattle=validated_data['slaughteredCattle'],
+                amount=validated_data['amount'],
+                loss=validated_data['loss'],
+                price=validated_data['price'],
+                purchase=pur,
+                nds=validated_data['nds'],
+                veterinar=validated_data['veterinar'],
+                goStandart=validated_data['goStandart'],
+                gigiena=validated_data['gigiena'],
+                customer=validated_data['customer'],
+                deklarent=validated_data['deklarent'],
+                delivery=validated_data['delivery'],
+                swift=validated_data['swift'],
+                ministryFinance=validated_data['ministryFinance'],
+                thatsall=thatsal,
+                accountnumber_id=validated_data['accountnumber'],
+                furaCondition_id = validated_data['furaCondition'],
+                finisheddate=validated_data['finisheddate'],
+                willBePaid=validated_data['willBePaid'],
+                residue=residues,
+                buymonth=validated_data['buymonth'],
+                finishedmonth=validated_data['finishedmonth'],
+                comment=validated_data['comment'],
+                tanPrice =tanPrice1,
+                amounttotal = validated_data['amount'],
+                amountpurchase = pur,
+                totalthatsall = thatsal,
+                )
+            model.save()
+        if finish:
+            for i in finish:
+                pur = float(validated_data['amount']) * float(validated_data['price'])
+                thatsal = float(pur) + float(validated_data['nds']) + float(validated_data['veterinar']) + float(
+                    validated_data['goStandart']) + float(validated_data['gigiena']) + float(
+                    validated_data['customer']) + float(validated_data['deklarent']) + float(
+                    validated_data['delivery']) + float(validated_data['swift'])
+                residues = float(thatsal) - float(validated_data['willBePaid'])
+                tanPrice1 = (float(thatsal) / float(validated_data['amount']))
+                a = float(i.amounttotal) + float(validated_data['amount'])
+                b = float(i.amountpurchase) + float(pur)
+                c = float(i.totalthatsall) + float(thatsal)
+                model = Sales(
+                    salesNumber=validated_data['salesNumber'],
+                    data=validated_data['data'],
+                    country_id=validated_data['country'],
+                    productname_id=validated_data['productname'],
+                    slaughteredCattle=validated_data['slaughteredCattle'],
+                    amount=validated_data['amount'],
+                    loss=validated_data['loss'],
+                    price=validated_data['price'],
+                    purchase=pur,
+                    nds=validated_data['nds'],
+                    veterinar=validated_data['veterinar'],
+                    goStandart=validated_data['goStandart'],
+                    gigiena=validated_data['gigiena'],
+                    customer=validated_data['customer'],
+                    deklarent=validated_data['deklarent'],
+                    delivery=validated_data['delivery'],
+                    swift=validated_data['swift'],
+                    ministryFinance=validated_data['ministryFinance'],
+                    thatsall=thatsal,
+                    accountnumber_id=validated_data['accountnumber'],
+                    furaCondition_id = validated_data['furaCondition'],
+                    finisheddate=validated_data['finisheddate'],
+                    willBePaid=validated_data['willBePaid'],
+                    residue=residues,
+                    buymonth=validated_data['buymonth'],
+                    finishedmonth=validated_data['finishedmonth'],
+                    comment=validated_data['comment'],
+                    tanPrice=tanPrice1,
+                    amountpurchase=b,
+                    amounttotal=a,
+                    totalthatsall=c,
+                )
+                model.save()
