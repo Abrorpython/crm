@@ -11,11 +11,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     ADMIN = 1
     KASSIR = 2
     SOTUVCHI = 3
+    DIREKTOR = 4
+    XARID = 5
 
     ROLE_CHOICES = (
         (ADMIN, 'Admin'),
         (KASSIR, 'Kassir'),
-        (SOTUVCHI, 'Sotuvchi')
+        (SOTUVCHI, 'Sotuvchi'),
+        (DIREKTOR,'Direktor'),
+        (XARID,'Xarid'),
     )
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=30, blank=True)
