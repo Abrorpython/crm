@@ -4,6 +4,7 @@ from .models import Shopping
 
 
 class ShoppingSerializers(serializers.Serializer):
+    id = serializers.IntegerField(read_only = True)
     furaName = serializers.CharField(required=True)  # fura nomi
     sana = serializers.CharField(required=True)  # sana
     countr = CounterpartySerializers(required=True)  # Kontrganet
