@@ -31,7 +31,6 @@ class ShoppingSerializers(serializers.Serializer):
     expense = serializers.FloatField()  # Chiqimlar kiritilishi shart
     foydaSoligi = serializers.FloatField()  # sof foyda solig'i
     finishFoyda = serializers.FloatField()  # oxirgi foyda
-    week = serializers.IntegerField()  # hafta
     shoppingTotal = serializers.FloatField()  # Harid summasi
     AmountTotal = serializers.FloatField()  # Xarid miqdori Jami
     TotalPrice = serializers.FloatField()  # Jami harid
@@ -84,7 +83,6 @@ class ShoppingSerializers(serializers.Serializer):
                         expense=validated_data['expense'],
                         foydaSoligi=foydaSoligi1,
                         finishFoyda=finishFoyda1,
-                        week=validated_data['week'],
                         shoppingTotal=shoppingTotal1,
                         AmountTotal=miqdor1,
                         TotalPrice=jami1,
@@ -128,7 +126,6 @@ class ShoppingSerializers(serializers.Serializer):
                         expense=validated_data['expense'],
                         foydaSoligi=foydaSoligi1,
                         finishFoyda=finishFoyda1,
-                        week=validated_data['week'],
                         shoppingTotal=shoppingTotal1,
                         AmountTotal=miqdor1,
                         TotalPrice=jami1,
@@ -176,7 +173,6 @@ class ShoppingSerializers(serializers.Serializer):
                         expense=validated_data['expense'],
                         foydaSoligi=foydaSoligi1,
                         finishFoyda=finishFoyda1,
-                        week=validated_data['week'],
                         shoppingTotal=shoppingTotal1,
                         AmountTotal=miqdor1,
                         TotalPrice=jami1,
@@ -220,7 +216,6 @@ class ShoppingSerializers(serializers.Serializer):
                         expense=validated_data['expense'],
                         foydaSoligi=foydaSoligi1,
                         finishFoyda=finishFoyda1,
-                        week=validated_data['week'],
                         shoppingTotal=shoppingTotal1,
                         AmountTotal=miqdor1,
                         TotalPrice=jami1,
@@ -234,6 +229,7 @@ class ShoppingSerializers(serializers.Serializer):
             yalpiFoyda1 = float(jami1) - (float(validated_data['olishNarxi']) * float(miqdor1))
             if validated_data['retroBonusApi'] == "True":
                 retroBonus1 = (float(yalpiFoyda1) * 3) / 100
+                print(retroBonus1)
                 operatFoyda1 = float(yalpiFoyda1) - float(retroBonus1)
                 if validated_data['paymentType'] == 3:
                     pulYechish1 = (float(yalpiFoyda1) * 5.5) / 100
@@ -276,7 +272,6 @@ class ShoppingSerializers(serializers.Serializer):
                             expense=validated_data['expense'],
                             foydaSoligi=foydaSoligi1,
                             finishFoyda=finishFoyda1,
-                            week=validated_data['week'],
                             shoppingTotal=shoppingTotal1,
                             AmountTotal=a,
                             TotalPrice=b,
@@ -324,7 +319,6 @@ class ShoppingSerializers(serializers.Serializer):
                             expense=validated_data['expense'],
                             foydaSoligi=foydaSoligi1,
                             finishFoyda=finishFoyda1,
-                            week=validated_data['week'],
                             shoppingTotal=shoppingTotal1,
                             AmountTotal=a,
                             TotalPrice=b,
@@ -376,7 +370,6 @@ class ShoppingSerializers(serializers.Serializer):
                             expense=validated_data['expense'],
                             foydaSoligi=foydaSoligi1,
                             finishFoyda=finishFoyda1,
-                            week=validated_data['week'],
                             shoppingTotal=shoppingTotal1,
                             AmountTotal=a,
                             TotalPrice=b,
@@ -424,7 +417,6 @@ class ShoppingSerializers(serializers.Serializer):
                             expense=validated_data['expense'],
                             foydaSoligi=foydaSoligi1,
                             finishFoyda=finishFoyda1,
-                            week=validated_data['week'],
                             shoppingTotal=shoppingTotal1,
                             AmountTotal=a,
                             TotalPrice=b,

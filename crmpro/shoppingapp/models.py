@@ -29,7 +29,6 @@ class Shopping(models.Model):
     expense = models.FloatField() # Chiqimlar kiritilishi shart
     foydaSoligi = models.FloatField() # sof foyda solig'i
     finishFoyda = models.FloatField() # oxirgi foyda
-    week = models.IntegerField() # hafta
     shoppingTotal = models.FloatField() # Harid summasi
     AmountTotal = models.FloatField() # Xarid miqdori Jami
     TotalPrice = models.FloatField() # Jami harid
